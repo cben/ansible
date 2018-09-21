@@ -69,8 +69,8 @@ options:
     - All parameters case sensitive.
     - 'Valid attributes are:'
     - ' - C(cpu_allocated) (int): use null to remove the quota.'
-    - ' - C(mem_allocated) (GB): use null to remove the quota.'
-    - ' - C(storage_allocated) (GB): use null to remove the quota.'
+    - ' - C(mem_allocated) (GiB): use null to remove the quota.'
+    - ' - C(storage_allocated) (GiB): use null to remove the quota.'
     - ' - C(vms_allocated) (int): use null to remove the quota.'
     - ' - C(templates_allocated) (int): use null to remove the quota.'
     required: false
@@ -355,7 +355,7 @@ class ManageIQTenant(object):
                 current_quota = None
 
             if quota_value:
-                # Change the byte values to GB
+                # Change the byte values to GiB
                 if quota_key in ['storage_allocated', 'mem_allocated']:
                     quota_value_int = int(quota_value) * 1024 * 1024 * 1024
                 else:
