@@ -55,7 +55,7 @@ options:
   parent_id:
     description:
     - The id of the parent tenant. If not supplied the root tenant is used.
-    - The C(parent_id) takes president over C(parent) when supplied
+    - The C(parent_id) takes precedence over C(parent) when supplied
     required: false
     default: null
   parent:
@@ -217,7 +217,7 @@ class ManageIQTenant(object):
                     self.module.fail_json(msg="Parent tenant '%s' not found in manageiq" % parent)
 
                 if len(parent_tenant_res) > 1:
-                    self.module.fail_json(msg="Multiple parent tenants not found in manageiq with name '%s" % parent)
+                    self.module.fail_json(msg="Multiple parent tenants found in manageiq with name '%s" % parent)
 
                 parent_tenant = parent_tenant_res[0]
                 parent_id = parent_tenant['id']
@@ -331,7 +331,7 @@ class ManageIQTenant(object):
     def tenant_quotas(self, tenant):
         """ Search for tenant quotas object by tenant.
         Returns:
-            the quotas for the tenant, or None if no tenant quotas were not found.
+            the quotas for the tenant, or None if no tenant quotas were found.
         """
 
         tenant_quotas = self.client.get("%s/quotas?expand=resources" % (tenant['href']))
